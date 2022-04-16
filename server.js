@@ -5,7 +5,7 @@ const path = require('path');
 const uuid = require('uuid');
 const app = express();
 // port will be 3001 for local, but can be changed for Heroku
-const port = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
