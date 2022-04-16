@@ -25,14 +25,14 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
   const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json'));
   const saveNote = req.body;
-  saveNote.id = uuid;
+  saveNote.id = uuid.v4();
   notes.push(saveNote);
   fs.writeFileSync('./Develop/db/db.json', JSON.stringify(notes));
     res.json(notes);
 });
 
 // delete from json using uuid. doesn't work
-app.delete('/api/notes:id', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
   const notes = JSON.parse(fs.readFileSync('./Develop/db/db.json'));
   const deleteNote = notes.filter((rmvNote) => rmvNote.id !== req.params.id);
   fs.writeFileSync('./Develop/db/db.json', JSON.stringify(deleteNote));
