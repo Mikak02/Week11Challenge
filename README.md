@@ -31,3 +31,6 @@ This project was build to create a note taking application that allows the clien
 
 ## Screenshot
 ![Screenshot of website](/Develop/public/assets/images/screenshot.png)
+
+## Video of Deployment
+![Googledrive](https://drive.google.com/file/d/1qgS92D2l7d-a3tJLIg5UccMudVMotLmc/view)
