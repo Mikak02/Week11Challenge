@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 // view engine i found on internet
 // app.set('view engine', 'ejs');
-const notes = require('./Develop/db/db');
+const notes = require('./Develop/db/db.json');
 const app = express();
 // port will be 3001 for local, but can be changed for Heroku
 const port = process.env.PORT || 3001;
@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
 app.use(express.json());
 // allows js/css from public
-app.use(express.static('./public'));
+app.use(express.static('./Develop/public'));
 
 // not sure if I'll need this
 // app.post('/api/notes', (req, res) => {
@@ -34,7 +34,7 @@ function createNewNotes(body, notesArray) {
     const notes = body;
     notesArray.push(notes);
     fs.writeFileSync(
-      path.join(__dirname, './Develop/db/db.json'),
+      path.join(__dirname, '/Develop/db/db.json'),
       JSON.stringify({ notes: notesArray }, null, 2)
     );
     return notes;
@@ -42,24 +42,23 @@ function createNewNotes(body, notesArray) {
 
 // json route
 app.get('/api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, '/db/db.json'));
+    res.sendFile(path.join(__dirname, '/Develop/db/db.json'));
 });
 
 // post
 app.post('/api/notes', (req, res) => {
     // req.body is where our incoming content will be
     console.log(req.body);
-
     res.json(req.body);
 });
 
 // html calls from modules. not working. don't know why but i blame ejs
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "Develop/public/index.html"));
+    res.sendFile(path.join(__dirname, "/Develop/public/index.html"));
 });
 
 app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Develop/public/notes.html'));
+    res.sendFile(path.join(__dirname, '/Develop/public/notes.html'));
 });
 
 // html calls with ejs viewer that do work
